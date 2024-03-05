@@ -32,12 +32,19 @@ class Calculator implements CalculatorOperations {
 
   @override
   double divide(double num1, double num2) {
-    // Your implementation for division here
-    return 0; // Replace this with the actual result
+    if (num2 != 0) {
+      return num1 / num2;
+    } else {
+      throw ArgumentError("Cannot divide by zero");
+    }
   }
 }
+class CalculatorApp extends StatefulWidget {
+  @override
+  _CalculatorAppState createState() => _CalculatorAppState();
+}
 
-class CalculatorApp extends StatelessWidget {
+class _CalculatorAppState extends State<CalculatorApp> {
   final Calculator calculator = Calculator();
   final TextEditingController num1Controller = TextEditingController();
   final TextEditingController num2Controller = TextEditingController();
@@ -99,23 +106,19 @@ class CalculatorApp extends StatelessWidget {
     );
   }
 
-  void calculate(Function operation) {
-    try {
-      double num1 = double.parse(num1Controller.text);
-      double num2 = double.parse(num2Controller.text);
+  void calculate(double Function(double, double) operation) {
+  try {
+    double num1 = double.parse(num1Controller.text);
+    double num2 = double.parse(num2Controller.text);
 
-      double resultValue = operation(num1, num2);
+    double resultValue = operation(num1, num2);
+    setState(() {
       result = resultValue.toString();
-
-      // Force UI update
-      setState(() {});
-    } catch (e) {
+    });
+  } catch (e) {
+    setState(() {
       result = 'Error: $e';
-      setState(() {});
-    }
+    });
   }
-
-  void setState(VoidCallback fn) {
-    fn();
-  }
+}
 }
