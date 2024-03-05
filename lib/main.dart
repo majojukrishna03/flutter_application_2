@@ -30,17 +30,24 @@ class Calculator implements CalculatorOperations {
   @override
   double multiply(double num1, double num2) {
 
-    return num1 * num2;
+    return 0;
 
   }
 
   @override
   double divide(double num1, double num2) {
-
-    return 0;
-
+    if (num2 != 0) {
+      return num1 / num2;
+    } else {
+      throw ArgumentError("Cannot divide by zero");
+    }
   }
 }
+class CalculatorApp extends StatefulWidget {
+  @override
+  _CalculatorAppState createState() => _CalculatorAppState();
+}
+
 
 class CalculatorApp extends StatefulWidget {
   @override
@@ -109,10 +116,20 @@ class _CalculatorAppState extends State<CalculatorApp> {
     );
   }
 
-  void calculate(Function operation) {
-    try {
-      double num1 = double.parse(num1Controller.text);
-      double num2 = double.parse(num2Controller.text);
+  void calculate(double Function(double, double) operation) {
+  try {
+    double num1 = double.parse(num1Controller.text);
+    double num2 = double.parse(num2Controller.text);
+
+
+    double resultValue = operation(num1, num2);
+    setState(() {
+      result = resultValue.toString();
+    });
+  } catch (e) {
+    setState(() {
+      result = 'Error: $e';
+    });
 
       double resultValue = operation(num1, num2);
       setState(() {
@@ -123,5 +140,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
         result = 'Error: $e';
       });
     }
+
   }
+}
 }
