@@ -11,11 +11,12 @@ abstract class CalculatorOperations {
   double divide(double num1, double num2);
 }
 
+// Performs addition of two numbers
 class Calculator implements CalculatorOperations {
   @override
   double add(double num1, double num2) {
-    // Your implementation for addition here
-    return 0; // Replace this with the actual result
+    double result = num1 + num2;
+    return result;
   }
 
   @override
@@ -34,10 +35,16 @@ class Calculator implements CalculatorOperations {
   double divide(double num1, double num2) {
     // Your implementation for division here
     return 0; // Replace this with the actual result
-  }
+    }
+  
 }
 
-class CalculatorApp extends StatelessWidget {
+class CalculatorApp extends StatefulWidget {
+  @override
+  _CalculatorAppState createState() => _CalculatorAppState();
+}
+
+class _CalculatorAppState extends State<CalculatorApp> {
   final Calculator calculator = Calculator();
   final TextEditingController num1Controller = TextEditingController();
   final TextEditingController num2Controller = TextEditingController();
@@ -105,17 +112,13 @@ class CalculatorApp extends StatelessWidget {
       double num2 = double.parse(num2Controller.text);
 
       double resultValue = operation(num1, num2);
-      result = resultValue.toString();
-
-      // Force UI update
-      setState(() {});
+      setState(() {
+        result = resultValue.toString();
+      });
     } catch (e) {
-      result = 'Error: $e';
-      setState(() {});
+      setState(() {
+        result = 'Error: $e';
+      });
     }
-  }
-
-  void setState(VoidCallback fn) {
-    fn();
   }
 }
