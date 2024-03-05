@@ -35,8 +35,7 @@ class Calculator implements CalculatorOperations {
   double divide(double num1, double num2) {
     // Your implementation for division here
     return 0; // Replace this with the actual result
-    }
-  
+  }
 }
 
 class CalculatorApp extends StatefulWidget {
