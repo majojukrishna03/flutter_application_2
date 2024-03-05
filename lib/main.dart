@@ -11,25 +11,34 @@ abstract class CalculatorOperations {
   double divide(double num1, double num2);
 }
 
+// Performs addition of two numbers
 class Calculator implements CalculatorOperations {
   @override
   double add(double num1, double num2) {
+
     return 0;
+
+
   }
 
   @override
   double subtract(double num1, double num2) {
+
     return 0;
   }
 
   @override
   double multiply(double num1, double num2) {
+
     return num1 * num2;
+
   }
 
   @override
   double divide(double num1, double num2) {
+
     return 0;
+
   }
 }
 
