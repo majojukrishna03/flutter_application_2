@@ -14,110 +14,108 @@ abstract class CalculatorOperations {
 class Calculator implements CalculatorOperations {
   @override
   double add(double num1, double num2) {
-    return num1 + num2;
+    // Your implementation for addition here
+    return 0; // Replace this with the actual result
   }
 
   @override
   double subtract(double num1, double num2) {
-    return num1 - num2;
+    // Your implementation for subtraction here
+    return 0; // Replace this with the actual result
   }
 
   @override
   double multiply(double num1, double num2) {
-    return num1 * num2;
+    // Your implementation for multiplication here
+    return 0; // Replace this with the actual result
   }
 
   @override
   double divide(double num1, double num2) {
-    if (num2 != 0) {
-      return num1 / num2;
-    } else {
-      throw ArgumentError("Cannot divide by zero");
-    }
+    // Your implementation for division here
+    return 0; // Replace this with the actual result
   }
 }
 
 class CalculatorApp extends StatelessWidget {
   final Calculator calculator = Calculator();
-  final TextEditingController _num1Controller = TextEditingController();
-  final TextEditingController _num2Controller = TextEditingController();
-  String _result = '';
-
-  void _calculate(String operation) {
-    double num1 = double.tryParse(_num1Controller.text) ?? 0.0;
-    double num2 = double.tryParse(_num2Controller.text) ?? 0.0;
-    double? result = null;
-
-    switch (operation) {
-      case 'add':
-        result = calculator.add(num1, num2);
-        break;
-      case 'subtract':
-        result = calculator.subtract(num1, num2);
-        break;
-      case 'multiply':
-        result = calculator.multiply(num1, num2);
-        break;
-      case 'divide':
-        try {
-          result = calculator.divide(num1, num2);
-        } catch (e) {
-          _result = "Error: ${e.toString()}";
-        }
-        break;
-    }
-
-    if (result != null) {
-      _result = 'Result: $result';
-    }
-  }
+  final TextEditingController num1Controller = TextEditingController();
+  final TextEditingController num2Controller = TextEditingController();
+  String result = '';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Calculator App'),
+          title: Text('Flutter Calculator'),
         ),
         body: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextField(
-                controller: _num1Controller,
+                controller: num1Controller,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Enter number 1'),
+                decoration: InputDecoration(labelText: 'Enter Number 1'),
               ),
               TextField(
-                controller: _num2Controller,
+                controller: num2Controller,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Enter number 2'),
+                decoration: InputDecoration(labelText: 'Enter Number 2'),
               ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () => _calculate('add'),
-                child: Text('+'),
-              ),
-              ElevatedButton(
-                onPressed: () => _calculate('subtract'),
-                child: Text('-'),
+                onPressed: () {
+                  calculate(calculator.add);
+                },
+                child: Text('Add'),
               ),
               ElevatedButton(
-                onPressed: () => _calculate('multiply'),
-                child: Text('*'),
+                onPressed: () {
+                  calculate(calculator.subtract);
+                },
+                child: Text('Subtract'),
               ),
               ElevatedButton(
-                onPressed: () => _calculate('divide'),
-                child: Text('/'),
+                onPressed: () {
+                  calculate(calculator.multiply);
+                },
+                child: Text('Multiply'),
               ),
-              SizedBox(height: 16.0),
-              Text(_result),
+              ElevatedButton(
+                onPressed: () {
+                  calculate(calculator.divide);
+                },
+                child: Text('Divide'),
+              ),
+              SizedBox(height: 20),
+              Text('Result: $result'),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void calculate(Function operation) {
+    try {
+      double num1 = double.parse(num1Controller.text);
+      double num2 = double.parse(num2Controller.text);
+
+      double resultValue = operation(num1, num2);
+      result = resultValue.toString();
+
+      // Force UI update
+      setState(() {});
+    } catch (e) {
+      result = 'Error: $e';
+      setState(() {});
+    }
+  }
+
+  void setState(VoidCallback fn) {
+    fn();
   }
 }
