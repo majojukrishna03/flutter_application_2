@@ -11,25 +11,20 @@ abstract class CalculatorOperations {
   double divide(double num1, double num2);
 }
 
-// Performs addition of two numbers
 class Calculator implements CalculatorOperations {
   @override
   double add(double num1, double num2) {
-    double result = num1 + num2;
-    return result;
+    return num1 + num2;
   }
 
   @override
   double subtract(double num1, double num2) {
-
     return num1 - num2;
   }
 
   @override
   double multiply(double num1, double num2) {
-
     return num1 * num2;
-
   }
 
   @override
@@ -41,11 +36,6 @@ class Calculator implements CalculatorOperations {
     }
   }
 }
-class CalculatorApp extends StatefulWidget {
-  @override
-  _CalculatorAppState createState() => _CalculatorAppState();
-}
-
 
 class CalculatorApp extends StatefulWidget {
   @override
@@ -115,19 +105,9 @@ class _CalculatorAppState extends State<CalculatorApp> {
   }
 
   void calculate(double Function(double, double) operation) {
-  try {
-    double num1 = double.parse(num1Controller.text);
-    double num2 = double.parse(num2Controller.text);
-
-
-    double resultValue = operation(num1, num2);
-    setState(() {
-      result = resultValue.toString();
-    });
-  } catch (e) {
-    setState(() {
-      result = 'Error: $e';
-    });
+    try {
+      double num1 = double.tryParse(num1Controller.text) ?? 0.0;
+      double num2 = double.tryParse(num2Controller.text) ?? 0.0;
 
       double resultValue = operation(num1, num2);
       setState(() {
@@ -135,10 +115,8 @@ class _CalculatorAppState extends State<CalculatorApp> {
       });
     } catch (e) {
       setState(() {
-        result = 'Error: $e';
+        result = 'Error: ${e is ArgumentError ? e.message : e}';
       });
     }
-
   }
-}
 }
