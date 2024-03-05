@@ -11,41 +11,44 @@ abstract class CalculatorOperations {
   double divide(double num1, double num2);
 }
 
+// Performs addition of two numbers
 class Calculator implements CalculatorOperations {
   @override
   double add(double num1, double num2) {
-    // Your implementation for addition here
-    return (num1 * num2); // Replace this with the actual result
+
+    return 0;
+
+
   }
 
   @override
   double subtract(double num1, double num2) {
-    // Your implementation for subtraction here
-    return (num1 + num2); // Replace this with the actual result
+
+    return 0;
   }
 
   @override
   double multiply(double num1, double num2) {
-    // Your implementation for multiplication here
-    
-    if (num2 != 0) {        // Replace this with the actual result
-      return num1 / num2;
-    } else {
-      throw ArgumentError("Cannot divide by zero");
-    }  
+
+    return 0;
+
   }
 
   @override
   double divide(double num1, double num2) {
-
     if (num2 != 0) {
       return num1 / num2;
     } else {
       throw ArgumentError("Cannot divide by zero");
     }
-
   }
 }
+class CalculatorApp extends StatefulWidget {
+  @override
+  _CalculatorAppState createState() => _CalculatorAppState();
+}
+
+
 class CalculatorApp extends StatefulWidget {
   @override
   _CalculatorAppState createState() => _CalculatorAppState();
@@ -118,6 +121,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
     double num1 = double.parse(num1Controller.text);
     double num2 = double.parse(num2Controller.text);
 
+
     double resultValue = operation(num1, num2);
     setState(() {
       result = resultValue.toString();
@@ -126,6 +130,17 @@ class _CalculatorAppState extends State<CalculatorApp> {
     setState(() {
       result = 'Error: $e';
     });
+
+      double resultValue = operation(num1, num2);
+      setState(() {
+        result = resultValue.toString();
+      });
+    } catch (e) {
+      setState(() {
+        result = 'Error: $e';
+      });
+    }
+
   }
 }
 }
