@@ -21,7 +21,7 @@ class Calculator implements CalculatorOperations {
   @override
   double subtract(double num1, double num2) {
     // Your implementation for subtraction here
-    return 0; // Replace this with the actual result
+    return num1 - num2; // Replace this with the actual result
   }
 
   @override
