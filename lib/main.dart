@@ -15,26 +15,30 @@ abstract class CalculatorOperations {
 class Calculator implements CalculatorOperations {
   @override
   double add(double num1, double num2) {
-    double result = num1 + num2;
-    return result;
+
+    return 0;
+
+
   }
 
   @override
   double subtract(double num1, double num2) {
-    // Your implementation for subtraction here
-    return num1 - num2; // Replace this with the actual result
+
+    return 0;
   }
 
   @override
   double multiply(double num1, double num2) {
-    // Your implementation for multiplication here
-    return 0; // Replace this with the actual result
+
+    return num1 * num2;
+
   }
 
   @override
   double divide(double num1, double num2) {
-    // Your implementation for division here
-    return 0; // Replace this with the actual result
+
+    return 0;
+
   }
 }
 
