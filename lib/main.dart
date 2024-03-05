@@ -15,28 +15,35 @@ class Calculator implements CalculatorOperations {
   @override
   double add(double num1, double num2) {
     // Your implementation for addition here
-    return 0; // Replace this with the actual result
+    return (num1 * num2); // Replace this with the actual result
   }
 
   @override
   double subtract(double num1, double num2) {
     // Your implementation for subtraction here
-    return 0; // Replace this with the actual result
+    return (num1 + num2); // Replace this with the actual result
   }
 
   @override
   double multiply(double num1, double num2) {
     // Your implementation for multiplication here
-    return 0; // Replace this with the actual result
+    
+    if (num2 != 0) {        // Replace this with the actual result
+      return num1 / num2;
+    } else {
+      throw ArgumentError("Cannot divide by zero");
+    }  
   }
 
   @override
   double divide(double num1, double num2) {
+
     if (num2 != 0) {
       return num1 / num2;
     } else {
       throw ArgumentError("Cannot divide by zero");
     }
+
   }
 }
 class CalculatorApp extends StatefulWidget {
